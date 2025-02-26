@@ -2,20 +2,29 @@
 
 import React from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 export interface LogoUploaderProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   label?: string;
+  square?: boolean;
 }
 
 export default function LogoUploader({
+  square,
   label,
   placeholder,
   id,
   ...rest
 }: LogoUploaderProps) {
   return (
-    <div className="flex gap-10 mb-3">
+    <div
+      className={clsx(
+        'flex mb-3',
+        !square && 'gap-10',
+        square && 'gap-2 flex-col',
+      )}
+    >
       {label && <p className="text-base color-gray-900">{label}</p>}
       <label
         htmlFor={id}
